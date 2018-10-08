@@ -42,6 +42,7 @@ fetch('https://api.github.com/users/RonWieder/repos')
   .then(response => response.json())
   .then(data => {
     const linksToProjects = data
+      .filter(repo => !repo.name.includes('github.io'))
       .map(repo => {
         return `<li><a
             href=${repo.html_url}
