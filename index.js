@@ -1,5 +1,5 @@
 // 'use strict';
-// import copy from 'copy-to-clipboard';
+import copy from 'copy-to-clipboard';
 // $('.link-icon').on(
 //   'click mousedown mouseup focus blur keydown change mouseover mouseleave',
 //   function(e) {
