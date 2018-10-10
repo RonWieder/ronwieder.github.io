@@ -1,22 +1,10 @@
 // 'use strict';
-import copy from 'copy-to-clipboard';
-// $('.link-icon').on(
-//   'click mousedown mouseup focus blur keydown change mouseover mouseleave',
-//   function(e) {
-//     console.log(e);
-//   }
-// );
+// import copy from 'copy-to-clipboard';
 
-// document.querySelectorAll('.link-icon').forEach(link => {
-//   link.addEventListener(
-//     'click mousedown mouseup focus blur keydown change mouseover hover',
-//     e => {
-//       console.log(e);
-//       //   $('.tooltipped').tooltip('close');
-//     }
-//   );
-// });
-let instance;
+// copyEmail = () => {
+//   copy(document.querySelector('.email').innerHTML);
+// };
+
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.tooltipped');
   var instances = M.Tooltip.init(elems, {
@@ -26,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     inDuration: 500
   });
   const tabElem = document.querySelector('.tabs');
-  instance = M.Tabs.init(tabElem, {
+  var instance = M.Tabs.init(tabElem, {
     onShow() {
       instance.updateTabIndicator();
     }
