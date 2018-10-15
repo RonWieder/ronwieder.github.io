@@ -1,55 +1,34 @@
-// 'use strict';
-// import copy from 'copy-to-clipboard';
-
-// copyEmail = () => {
-//   copy(document.querySelector('.email').innerHTML);
-// };
-
 document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.tooltipped');
-  var instances = M.Tooltip.init(elems, {
+  M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
     enterDelay: 400,
     exitDelay: 150,
     margin: 3,
     inDuration: 500
   });
-  const tabElem = document.querySelector('.tabs');
-  var instance = M.Tabs.init(tabElem, {
-    onShow() {
-      instance.updateTabIndicator();
-    }
-  });
+  M.Collapsible.init(document.querySelectorAll('.collapsible'), {});
+  M.Tabs.init(document.querySelector('.tabs'), {});
+  M.Materialbox.init(document.querySelectorAll('.materialboxed'), {});
 });
-
-function copyEmail(el) {
-  console.log(el.innerHTML);
-  copy(el.innerHTML);
-}
 
 fetch('https://api.github.com/users/RonWieder/repos')
   .then(response => response.json())
   .then(data => {
     const linksToProjects = data
       .filter(repo => !repo.name.includes('github.io'))
-      .map(repo => {
-        return `<li><a
+      .reduce(
+        (acc, repo) =>
+          (acc += `<li><a
             href=${repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
             onclick='alertClick()'>
             ${repo.name}
           </a>
-        </li>`;
-      })
-      .join('')
-      .replace(/ /g, '');
+        </li>`),
+        ''
+      );
     document.querySelector('.projects-links').innerHTML = linksToProjects;
   });
-
-$(document).ready(() => {
-  $('.collapsible').collapsible();
-  $('.materialboxed').materialbox();
-});
 
 alertClick = () => {
   alert('You will now be redirected to an external site on a new tab');
@@ -63,7 +42,6 @@ activateTabs = _e => {
     document.querySelector('.scale-transition').addEventListener(
       'transitionend',
       () => {
-        console.log('Hi');
         document.querySelector(_e.getAttribute('dir')).click();
         tab_view = true;
       },
@@ -78,3 +56,5 @@ closeTabs = () => {
   document.querySelector('.scale-transition').classList.remove('scale-in');
   tab_view = false;
 };
+
+new ClipboardJS('.email');

@@ -107,6 +107,10 @@ li i {
   left: 30px;
 }
 
+.about-link:focus.active {
+  background-color: transparent !important;
+}
+
 .indicator {
   background-color: #0288d1 !important;
 }
